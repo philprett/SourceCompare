@@ -98,9 +98,26 @@ namespace SourceCompare
         {
             Cursor = Cursors.WaitCursor;
             results.Clear();
+            progressBar.Value = 0;
+            progressBar.Maximum = CountFiles(txtFolder1.Text);
             CompareFolders(txtFolder1.Text, txtFolder2.Text);
             UpdateResultsGrid();
+            progressBar.Value = progressBar.Maximum;
             Cursor = Cursors.Arrow;
+        }
+
+        private int CountFiles(string folder)
+        {
+            int ret = 0;
+
+            DirectoryInfo dir = new DirectoryInfo(folder);
+            foreach (DirectoryInfo sub in dir.GetDirectories())
+            {
+                ret += CountFiles(sub.FullName);
+            }
+            ret += dir.GetFiles().Count();
+
+            return ret;
         }
 
         private void CompareFolders(string folder1, string folder2, string folder = "")
@@ -186,6 +203,7 @@ namespace SourceCompare
                         ComparisonResult = Result.Results.Only1
                     });
                 }
+                progressBar.Value++;
                 Application.DoEvents();
             }
             foreach (FileInfo file2 in files2)

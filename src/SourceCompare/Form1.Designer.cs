@@ -30,29 +30,30 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuMainWindow = new System.Windows.Forms.MenuStrip();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFolder1 = new System.Windows.Forms.TextBox();
-            this.txtFolder2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.gridResults = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.GridPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridComparison = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridModified1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridModified2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.setFolder1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setFolder2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbComparison = new System.Windows.Forms.ToolStripComboBox();
             this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resultActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteSameFrom1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteSameFrom2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbShowSame = new System.Windows.Forms.ToolStripComboBox();
             this.cmbShowOnly1 = new System.Windows.Forms.ToolStripComboBox();
             this.cmbShowOnly2 = new System.Windows.Forms.ToolStripComboBox();
             this.cmbShowDifferent = new System.Windows.Forms.ToolStripComboBox();
-            this.cmbComparison = new System.Windows.Forms.ToolStripComboBox();
+            this.resultActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSameFrom1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSameFrom2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFolder1 = new System.Windows.Forms.TextBox();
+            this.txtFolder2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.gridResults = new System.Windows.Forms.DataGridView();
+            this.GridPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridComparison = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridModified1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridModified2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.menuMainWindow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResults)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +73,126 @@
             this.menuMainWindow.Size = new System.Drawing.Size(844, 27);
             this.menuMainWindow.TabIndex = 0;
             this.menuMainWindow.Text = "menuStrip1";
+            // 
+            // setFolder1ToolStripMenuItem
+            // 
+            this.setFolder1ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.pencil;
+            this.setFolder1ToolStripMenuItem.Name = "setFolder1ToolStripMenuItem";
+            this.setFolder1ToolStripMenuItem.Size = new System.Drawing.Size(96, 23);
+            this.setFolder1ToolStripMenuItem.Text = "Set Folder &1";
+            this.setFolder1ToolStripMenuItem.Click += new System.EventHandler(this.setFolder1ToolStripMenuItem_Click);
+            // 
+            // setFolder2ToolStripMenuItem
+            // 
+            this.setFolder2ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.pencil;
+            this.setFolder2ToolStripMenuItem.Name = "setFolder2ToolStripMenuItem";
+            this.setFolder2ToolStripMenuItem.Size = new System.Drawing.Size(96, 23);
+            this.setFolder2ToolStripMenuItem.Text = "Set Folder &2";
+            this.setFolder2ToolStripMenuItem.Click += new System.EventHandler(this.setFolder2ToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.exitToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.door_in;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(53, 23);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // cmbComparison
+            // 
+            this.cmbComparison.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbComparison.Items.AddRange(new object[] {
+            "File Contents",
+            "File Timestamp"});
+            this.cmbComparison.Name = "cmbComparison";
+            this.cmbComparison.Size = new System.Drawing.Size(121, 23);
+            // 
+            // compareToolStripMenuItem
+            // 
+            this.compareToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.page_copy;
+            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
+            this.compareToolStripMenuItem.Size = new System.Drawing.Size(84, 23);
+            this.compareToolStripMenuItem.Text = "&Compare";
+            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
+            // 
+            // showResultsToolStripMenuItem
+            // 
+            this.showResultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmbShowSame,
+            this.cmbShowOnly1,
+            this.cmbShowOnly2,
+            this.cmbShowDifferent});
+            this.showResultsToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_gear;
+            this.showResultsToolStripMenuItem.Name = "showResultsToolStripMenuItem";
+            this.showResultsToolStripMenuItem.Size = new System.Drawing.Size(104, 23);
+            this.showResultsToolStripMenuItem.Text = "Show Results";
+            // 
+            // cmbShowSame
+            // 
+            this.cmbShowSame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShowSame.Items.AddRange(new object[] {
+            "Show Same",
+            "Hide Same"});
+            this.cmbShowSame.Name = "cmbShowSame";
+            this.cmbShowSame.Size = new System.Drawing.Size(121, 23);
+            this.cmbShowSame.SelectedIndexChanged += new System.EventHandler(this.cmbShowSame_SelectedIndexChanged_1);
+            // 
+            // cmbShowOnly1
+            // 
+            this.cmbShowOnly1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShowOnly1.Items.AddRange(new object[] {
+            "Show Only 1",
+            "Hide Only 1"});
+            this.cmbShowOnly1.Name = "cmbShowOnly1";
+            this.cmbShowOnly1.Size = new System.Drawing.Size(121, 23);
+            this.cmbShowOnly1.SelectedIndexChanged += new System.EventHandler(this.cmbShowOnly1_SelectedIndexChanged);
+            // 
+            // cmbShowOnly2
+            // 
+            this.cmbShowOnly2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShowOnly2.Items.AddRange(new object[] {
+            "Show Only 2",
+            "Hide Only 2"});
+            this.cmbShowOnly2.Name = "cmbShowOnly2";
+            this.cmbShowOnly2.Size = new System.Drawing.Size(121, 23);
+            this.cmbShowOnly2.SelectedIndexChanged += new System.EventHandler(this.cmbShowOnly2_SelectedIndexChanged);
+            // 
+            // cmbShowDifferent
+            // 
+            this.cmbShowDifferent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShowDifferent.Items.AddRange(new object[] {
+            "Show Different",
+            "Hide Different"});
+            this.cmbShowDifferent.Name = "cmbShowDifferent";
+            this.cmbShowDifferent.Size = new System.Drawing.Size(121, 23);
+            this.cmbShowDifferent.SelectedIndexChanged += new System.EventHandler(this.cmbShowDifferent_SelectedIndexChanged);
+            // 
+            // resultActionsToolStripMenuItem
+            // 
+            this.resultActionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteSameFrom1ToolStripMenuItem,
+            this.deleteSameFrom2ToolStripMenuItem});
+            this.resultActionsToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_go;
+            this.resultActionsToolStripMenuItem.Name = "resultActionsToolStripMenuItem";
+            this.resultActionsToolStripMenuItem.Size = new System.Drawing.Size(110, 23);
+            this.resultActionsToolStripMenuItem.Text = "Result Actions";
+            // 
+            // deleteSameFrom1ToolStripMenuItem
+            // 
+            this.deleteSameFrom1ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_delete;
+            this.deleteSameFrom1ToolStripMenuItem.Name = "deleteSameFrom1ToolStripMenuItem";
+            this.deleteSameFrom1ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.deleteSameFrom1ToolStripMenuItem.Text = "Delete Same from 1";
+            this.deleteSameFrom1ToolStripMenuItem.Click += new System.EventHandler(this.deleteSameFrom1ToolStripMenuItem_Click);
+            // 
+            // deleteSameFrom2ToolStripMenuItem
+            // 
+            this.deleteSameFrom2ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_delete;
+            this.deleteSameFrom2ToolStripMenuItem.Name = "deleteSameFrom2ToolStripMenuItem";
+            this.deleteSameFrom2ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.deleteSameFrom2ToolStripMenuItem.Text = "Delete Same from 2";
+            this.deleteSameFrom2ToolStripMenuItem.Click += new System.EventHandler(this.deleteSameFrom2ToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -129,18 +250,9 @@
             this.gridResults.ReadOnly = true;
             this.gridResults.RowHeadersVisible = false;
             this.gridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridResults.Size = new System.Drawing.Size(817, 412);
+            this.gridResults.Size = new System.Drawing.Size(817, 384);
             this.gridResults.TabIndex = 5;
             this.gridResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridResults_CellDoubleClick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 82);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Results";
             // 
             // GridPath
             // 
@@ -172,131 +284,30 @@
             this.GridModified2.ReadOnly = true;
             this.GridModified2.Width = 120;
             // 
-            // setFolder1ToolStripMenuItem
+            // label3
             // 
-            this.setFolder1ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.pencil;
-            this.setFolder1ToolStripMenuItem.Name = "setFolder1ToolStripMenuItem";
-            this.setFolder1ToolStripMenuItem.Size = new System.Drawing.Size(96, 23);
-            this.setFolder1ToolStripMenuItem.Text = "Set Folder &1";
-            this.setFolder1ToolStripMenuItem.Click += new System.EventHandler(this.setFolder1ToolStripMenuItem_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Results";
             // 
-            // setFolder2ToolStripMenuItem
+            // progressBar
             // 
-            this.setFolder2ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.pencil;
-            this.setFolder2ToolStripMenuItem.Name = "setFolder2ToolStripMenuItem";
-            this.setFolder2ToolStripMenuItem.Size = new System.Drawing.Size(96, 23);
-            this.setFolder2ToolStripMenuItem.Text = "Set Folder &2";
-            this.setFolder2ToolStripMenuItem.Click += new System.EventHandler(this.setFolder2ToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.exitToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.door_in;
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(53, 23);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // compareToolStripMenuItem
-            // 
-            this.compareToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.page_copy;
-            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
-            this.compareToolStripMenuItem.Size = new System.Drawing.Size(84, 23);
-            this.compareToolStripMenuItem.Text = "&Compare";
-            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
-            // 
-            // resultActionsToolStripMenuItem
-            // 
-            this.resultActionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteSameFrom1ToolStripMenuItem,
-            this.deleteSameFrom2ToolStripMenuItem});
-            this.resultActionsToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_go;
-            this.resultActionsToolStripMenuItem.Name = "resultActionsToolStripMenuItem";
-            this.resultActionsToolStripMenuItem.Size = new System.Drawing.Size(110, 23);
-            this.resultActionsToolStripMenuItem.Text = "Result Actions";
-            // 
-            // deleteSameFrom1ToolStripMenuItem
-            // 
-            this.deleteSameFrom1ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_delete;
-            this.deleteSameFrom1ToolStripMenuItem.Name = "deleteSameFrom1ToolStripMenuItem";
-            this.deleteSameFrom1ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.deleteSameFrom1ToolStripMenuItem.Text = "Delete Same from 1";
-            this.deleteSameFrom1ToolStripMenuItem.Click += new System.EventHandler(this.deleteSameFrom1ToolStripMenuItem_Click);
-            // 
-            // deleteSameFrom2ToolStripMenuItem
-            // 
-            this.deleteSameFrom2ToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_delete;
-            this.deleteSameFrom2ToolStripMenuItem.Name = "deleteSameFrom2ToolStripMenuItem";
-            this.deleteSameFrom2ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.deleteSameFrom2ToolStripMenuItem.Text = "Delete Same from 2";
-            this.deleteSameFrom2ToolStripMenuItem.Click += new System.EventHandler(this.deleteSameFrom2ToolStripMenuItem_Click);
-            // 
-            // showResultsToolStripMenuItem
-            // 
-            this.showResultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmbShowSame,
-            this.cmbShowOnly1,
-            this.cmbShowOnly2,
-            this.cmbShowDifferent});
-            this.showResultsToolStripMenuItem.Image = global::SourceCompare.Properties.Resources.script_gear;
-            this.showResultsToolStripMenuItem.Name = "showResultsToolStripMenuItem";
-            this.showResultsToolStripMenuItem.Size = new System.Drawing.Size(104, 23);
-            this.showResultsToolStripMenuItem.Text = "Show Results";
-            // 
-            // cmbShowSame
-            // 
-            this.cmbShowSame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbShowSame.Items.AddRange(new object[] {
-            "Show Same",
-            "Hide Same"});
-            this.cmbShowSame.Name = "cmbShowSame";
-            this.cmbShowSame.Size = new System.Drawing.Size(121, 23);
-            this.cmbShowSame.SelectedIndexChanged += new System.EventHandler(this.cmbShowSame_SelectedIndexChanged_1);
-            // 
-            // cmbShowOnly1
-            // 
-            this.cmbShowOnly1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbShowOnly1.Items.AddRange(new object[] {
-            "Show Only 1",
-            "Hide Only 1"});
-            this.cmbShowOnly1.Name = "cmbShowOnly1";
-            this.cmbShowOnly1.Size = new System.Drawing.Size(121, 23);
-            this.cmbShowOnly1.SelectedIndexChanged += new System.EventHandler(this.cmbShowOnly1_SelectedIndexChanged);
-            // 
-            // cmbShowOnly2
-            // 
-            this.cmbShowOnly2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbShowOnly2.Items.AddRange(new object[] {
-            "Show Only 2",
-            "Hide Only 2"});
-            this.cmbShowOnly2.Name = "cmbShowOnly2";
-            this.cmbShowOnly2.Size = new System.Drawing.Size(121, 23);
-            this.cmbShowOnly2.SelectedIndexChanged += new System.EventHandler(this.cmbShowOnly2_SelectedIndexChanged);
-            // 
-            // cmbShowDifferent
-            // 
-            this.cmbShowDifferent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbShowDifferent.Items.AddRange(new object[] {
-            "Show Different",
-            "Hide Different"});
-            this.cmbShowDifferent.Name = "cmbShowDifferent";
-            this.cmbShowDifferent.Size = new System.Drawing.Size(121, 23);
-            this.cmbShowDifferent.SelectedIndexChanged += new System.EventHandler(this.cmbShowDifferent_SelectedIndexChanged);
-            // 
-            // cmbComparison
-            // 
-            this.cmbComparison.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbComparison.Items.AddRange(new object[] {
-            "File Contents",
-            "File Timestamp"});
-            this.cmbComparison.Name = "cmbComparison";
-            this.cmbComparison.Size = new System.Drawing.Size(121, 23);
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(15, 488);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(817, 22);
+            this.progressBar.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 522);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gridResults);
             this.Controls.Add(this.txtFolder2);
@@ -344,6 +355,7 @@
         private System.Windows.Forms.ToolStripComboBox cmbShowOnly2;
         private System.Windows.Forms.ToolStripComboBox cmbShowDifferent;
         private System.Windows.Forms.ToolStripComboBox cmbComparison;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
