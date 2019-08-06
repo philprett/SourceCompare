@@ -233,20 +233,24 @@ namespace SourceCompare
             {
                 byte[] contents1 = File.ReadAllBytes(file1.FullName);
                 byte[] contents2 = File.ReadAllBytes(file2.FullName);
-                if (contents1.Length != contents2.Length)
+
+				byte[] contentsNoCr1 = contents1.Where(c => c != 13).ToArray();
+				byte[] contentsNoCr2 = contents2.Where(c => c != 13).ToArray();
+
+				if (contentsNoCr1.Length != contentsNoCr2.Length)
                 {
                     return Result.Results.Different;
                 }
-                for (long c = 0; c < contents1.Length; c++)
+                for (long c = 0; c < contentsNoCr2.Length; c++)
                 {
-                    if (contents1[c] != contents2[c])
+                    if (contentsNoCr2[c] != contentsNoCr2[c])
                     {
                         return Result.Results.Different;
                     }
                     Application.DoEvents();
                 }
-                contents1 = null;
-                contents2 = null;
+				contentsNoCr2 = null;
+				contentsNoCr2 = null;
             }
             else if (cmbComparison.SelectedIndex == 1)
             {
