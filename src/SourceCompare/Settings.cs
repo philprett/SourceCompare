@@ -37,38 +37,41 @@ namespace SourceCompare
             ShowOnly1 = 0;
             ShowOnly2 = 0;
             ShowDifferent = 0;
-            string file = File.ReadAllText(Filename);
-            foreach (string line in file.Split(new[] { '\n' }).Select(l => l.Trim()))
-            {
-                if (line.StartsWith("folder1="))
-                {
-                    Folder1 = line.Substring(line.IndexOf("=") + 1);
-                }
-                else if (line.StartsWith("folder2="))
-                {
-                    Folder2 = line.Substring(line.IndexOf("=") + 1);
-                }
-                else if (line.StartsWith("filecomparison="))
-                {
-                    FileComparison = int.Parse(line.Substring(line.IndexOf("=") + 1));
-                }
-                else if (line.StartsWith("showsame="))
-                {
-                    ShowSame = int.Parse(line.Substring(line.IndexOf("=") + 1));
-                }
-                else if (line.StartsWith("showonly1="))
-                {
-                    ShowOnly1 = int.Parse(line.Substring(line.IndexOf("=") + 1));
-                }
-                else if (line.StartsWith("showonly2="))
-                {
-                    ShowOnly2 = int.Parse(line.Substring(line.IndexOf("=") + 1));
-                }
-                else if (line.StartsWith("showdifferent="))
-                {
-                    ShowDifferent = int.Parse(line.Substring(line.IndexOf("=") + 1));
-                }
-            }
+			if (File.Exists(Filename))
+			{
+				string file = File.ReadAllText(Filename);
+				foreach (string line in file.Split(new[] { '\n' }).Select(l => l.Trim()))
+				{
+					if (line.StartsWith("folder1="))
+					{
+						Folder1 = line.Substring(line.IndexOf("=") + 1);
+					}
+					else if (line.StartsWith("folder2="))
+					{
+						Folder2 = line.Substring(line.IndexOf("=") + 1);
+					}
+					else if (line.StartsWith("filecomparison="))
+					{
+						FileComparison = int.Parse(line.Substring(line.IndexOf("=") + 1));
+					}
+					else if (line.StartsWith("showsame="))
+					{
+						ShowSame = int.Parse(line.Substring(line.IndexOf("=") + 1));
+					}
+					else if (line.StartsWith("showonly1="))
+					{
+						ShowOnly1 = int.Parse(line.Substring(line.IndexOf("=") + 1));
+					}
+					else if (line.StartsWith("showonly2="))
+					{
+						ShowOnly2 = int.Parse(line.Substring(line.IndexOf("=") + 1));
+					}
+					else if (line.StartsWith("showdifferent="))
+					{
+						ShowDifferent = int.Parse(line.Substring(line.IndexOf("=") + 1));
+					}
+				}
+			}
         }
 
         public void Save()
